@@ -1,2 +1,2 @@
-# warlock_of_firetop_mountain
-WORK IN PROGRESS: an attempt to make a python version of The Warlock of Firetop Mountain (A 'choose your own adventure' style book)
+# Misc Python Projects
+WORK IN PROGRESS: Some fun little python projects based around 'Choose Your Own Adventure' Style Books (e.g. The Fighting Fantasy books).
