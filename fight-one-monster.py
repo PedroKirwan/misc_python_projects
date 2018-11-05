@@ -79,7 +79,8 @@ def fight_creature(skill, stamina):
     if creature_stamina < 1: 
         print("the creature is dead")
     elif hero_stamina < 1:
-        hero_death("So long amigo!")
+        hero_death("So long amigo! You have perished")
+        
 
 
 #The fight begins!
