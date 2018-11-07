@@ -1,12 +1,14 @@
 # this is a work in proress!
 
-
+from os import system
 import random
 
 class Dungeon_room(object):
 
     def enter(self):
         print("Welcome to dungeon room")
+        whiskers()
+        system("animate laptopcat.gif")
         return mouse
 
 dungeon = Dungeon_room()
@@ -15,6 +17,7 @@ class Mouse_room(object):
    
     def enter(self):
         print("Welcome to the Mouse Room")
+        system("display mice_around_table.jpeg")
         return third
 
 mouse = Mouse_room()
@@ -48,17 +51,8 @@ class Runner(object):
             store = next_room.enter()
             next_room = store
 
+
 Run = Runner()
 Run.loop_through_rooms()
 
 
-"""
-
-
-        next_room = dungeon
-        while next_room != "final_room":
-            next_room.enter()
-
-    print("It has come out of the loop now")
-
-"""
