@@ -47,7 +47,7 @@ def define_hero_stamina():
 
 def define_hero_charm():
     global hero_charm
-    hero_charm = 1 #random.randint(1, 12) + 12
+    hero_charm = random.randint(1, 12) + 12
 
 def hero_death(taunt):
     print(taunt)

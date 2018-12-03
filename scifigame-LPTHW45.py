@@ -1,18 +1,25 @@
 # this is a work in proress!
 
 from os import system
+import sys
 import random
 import fightlibrary
 from textwrap import dedent
 
-# currently launches in max window and blocks terminal. would like to 
-# launch either minimised or with small window but nothing straightforward
-# on stackoverflow that i could find
+# to do 
+# proof all strings
+# loop all decision trees to deal with nonsense
+# change turret combat so that doesn't refer to a creature
+# launch the scif msuic in the background
 
-"""
-print("Some atmospheric sci fi music by bensound.com. You can either minimise or close it if you like")
+print(dedent("""
+Some atmospheric sci fi music by bensound.com.
+You can either minimise or close it if you like")
+
+Close any pictures that pop up to continue with the story
+"""))
+
 system("audacious bensoundscifi.mp3 . &")
-"""
 
 class Dungeon_room(object):
 
@@ -82,9 +89,9 @@ class Dungeon_room(object):
             print(dedent("""
                   You press on the ceiling slightly and one of the tiles moves
                   Shoddy Veden craftsmanship! Too busy declaring war to learn
-                  masonery. You push the title and clear and see it opens 
+                  masonery. You push the tile away and see it opens 
                   into an airvent. Checking for the guard you quickly haul 
-                  yourself up and put the title back in place. The vent is
+                  yourself up and put the tile back in place. The vent is
                   dark and smells stale but you press on. Ahead you hear 
                   nervous squeaking. You crawl further forward and away 
                   from the prison ...
@@ -155,7 +162,7 @@ class Mouse_room(object):
                   """))
             print("hero charm is", fightlibrary.hero_charm)
             charm_choice = input("Press any key to start the charm test ")
-            if (random.randint(1, 12) <= fightlibrary.hero_charm):
+            if (random.randint(1, 24) <= fightlibrary.hero_charm):
                 print(dedent("""
                       General Nibbles nods slowly. 'Clearly your are a
                       friend of the mouse and these are indeed times when mice
@@ -319,7 +326,7 @@ class veden(object):
             """))
             if "right" in choice_corridor_fork:
                 stop_loop = "stop"
-                print("right")
+                return shuttlebay   
             elif "left" in choice_corridor_fork:
                 stop_loop = "stop"
                 return gun_turret_place
@@ -343,22 +350,83 @@ class gun_turret(object):
         print(dedent("""
         The corridor curves around to the right and you follow it.
         """))
+        return shuttlebay
         
 gun_turret_place = gun_turret()
 
+class shuttle_bay(object):
 
+    def enter(self):
+        print(dedent("""
+        You reach the shuttle bay and burst through the doors.
+        There's no one to stop you so you jump into the first
+        craft you see and blast off into space. No sooner have you
+        launch but you 3 Veden fighters burst out of the mothership
+        in hot pursuit. Suddenly you hear a beeping come from your dashboard
+        and you look down to see the following message on all screens.
 
+        'Death to the Veden! Blessed is the Meepishan who will deliver
+        mice from their tormentors'
+
+        You are not sure what is happening but feel confident that it 
+        is not good ...
+
+        """))
+        input("press any key to continue ...")
+        if fightlibrary.coat_pockets["side_pocket"] == "Old Jake":
+            return final
+        else:
+            print(dedent("""
+            Your timing is not great my friend.
+            The mice upboard the Veden ship have risen
+            up against their captors and have rigged all the
+            fighter ships to explode upon acceleration. Your
+            sweetest moment of escape is also your last. It
+            happens so quickly you never notice. Your last
+            thought is whether you might get back to Bristol
+            in time for the football this weekend. You will
+            not be back because you, your ship and the pursuing
+            Vedens are insantly vaporised.
+            """))
+            sys.exit()
+            
+
+shuttlebay = shuttle_bay()
 
 class Final_room(object):
-    pass
 
+    def enter(self):
+        print(dedent("""
+        No soon do you hear the beeping than old Jake awake
+        
+        'Let me take care of this' he says and starts typing
+        on the keyboard.
+
+        Unknown to you the mice upboard the Veden ship had rigged
+        all the figher ships to explode upon acceleration. Luckily
+        for you your small companion knows the override code.
+
+        The Vedden ships in pursuit are not so lucky and explode
+        behind you one after the other.
+
+        You hit lightspeed, smile at Old Jake and realies you
+        have time to make it back to Bristol in time for the football         this weekend.
+
+        Beside you Old Jake looks far into the darkness and nods
+        slowly.
+
+        'So the Revolution begins ...'
+        
+        """))
+        sys.exit()
+    
 final = Final_room()
 
 class Runner(object):
 
     def loop_through_rooms(self):
         next_room = dungeon.enter()
-        while next_room != final:
+        while 1 != 2:
             store = next_room.enter()
             next_room = store
 
