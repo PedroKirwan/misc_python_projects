@@ -2,13 +2,93 @@
 
 from os import system
 import random
+import fightlibrary
+from textwrap import dedent
+
+# currently launches in max window and blocks terminal. would like to 
+# launch either minimised or with small window but nothing straightforward
+# on stackoverflow that i could find
+
+"""
+print("Some atmospheric sci fi music by bensound.com. You can either minimise or close it if you like")
+system("audacious bensoundscifi.mp3 . &")
+"""
 
 class Dungeon_room(object):
 
     def enter(self):
-        print("Welcome to dungeon room")
-        whiskers()
-        system("animate laptopcat.gif")
+        system("display prisoncell.jpeg")
+        print(dedent("""
+              You awake to find yourself in a prison. This is hardly a surprise.
+              After all saboteurs are rarely given banquets in their honour and
+              this is what you are. A saboteur, a spy, a ghost but one that
+              signed up with their eyes wide open. You knew the risks. After the
+              Veden detonated the neural bomb in your hometown, though,
+              there was no going back. Thousands of people reduced 
+              to hollow shells in seconds. You were having tea with
+              mum and dad that day. Her scolding him about the small
+              leaning tower of biscuits next to his cup and him 
+              winking and smuggling another as soon as she
+              looked away. Then the bomb went off and they
+              just stared. Silently, unblinking. An entire town turned to
+              blank slates. The United Planets called it a War Crime but
+              the Veden don't understand such concepts. No matter, you thought,
+              they don't need to understand they just need to pay. So you
+              signed up and got to work. Four ships you've taken care of.
+              You disable the engines and then the fleet moves in and 
+              mops them up. This fifth was the bridge too far, though, and they 
+              had been expecting you. This is not over though, you mutter
+              to yourself. You'll take down fifty Veden ships before you're
+              done but first you have to get out of this prison.
+
+              You examine your surroundings. Where would you like to start.
+
+              Choose to:
+
+              Check the door
+              Check the ceiling
+              Check the floor
+              Check the walls
+              """))
+        
+        choice = ""
+
+        # add in something here so it recognises if someone has tried an option
+        # more than once
+        while "ceiling" not in choice:
+            choice = input("What would you like to do? ")
+            if "door" in choice:
+                print(dedent("""
+                It's solid. There's no way you're getting through it.
+                Plus the lock is biometric and last you checked you weren't
+                even the right species for it. Choose again.
+                """))
+            elif "floor" in choice:
+                print(dedent("""
+                      The floor is reinforced steel with no joins.
+                      You're going to need to find a different way out
+                      """))
+            elif "wall" in choice:
+                print(dedent("""
+                      You find some graffiti from previous guests.
+                      "Bristol remembers". You catch your breath for a second
+                      but this is no time for sentimentality. You must 
+                      find a way out.
+                      """))
+            else:
+                print("That doesn't make sense. Try something else")
+          
+        if "ceiling" in choice:
+            print(dedent("""
+                  You press on the ceiling slightly and one of the tiles moves
+                  Shoddy Veden craftsmanship! Too busy declaring war to learn
+                  masonery. You push the title and clear and see it opens 
+                  into an airvent. Checking for the guard you quickly haul 
+                  yourself up and put the title back in place. The vent is
+                  dark and smells stale but you press on. Ahead you hear 
+                  nervous squeaking. You crawl further forward and away 
+                  from the prison ...
+                  """))
         return mouse
 
 dungeon = Dungeon_room()
@@ -16,27 +96,258 @@ dungeon = Dungeon_room()
 class Mouse_room(object):
    
     def enter(self):
-        print("Welcome to the Mouse Room")
         system("display mice_around_table.jpeg")
-        return third
+        choice = input(dedent("""
+                      Crawling forward you realise the sqeaking is 
+                      coming from the next room below the airvent.
+                      Now you are above it and you peer cautiously
+                      through the vent. From your time hauling gas
+                      on the moons of Mouse World you can just about
+                      make sense of the squeaks though it's
+                      in a dialect you're unfamiliar with.
 
+                      First mouse: 'With respect, we must rise up
+                      General Nibbles! We've been patient but now
+                      is the time for action! How many more must die
+                      as we wait "till the time is right?"'
+
+                      General Nibbles: 'I respect your fire
+                      Private Basil but you're young and don't
+                      remember the disastrous attack on Catus5. We will
+                      continue to wait and that is final'
+
+                      Suddenly the vent gives way beneath your weight
+                      and you find yourself amongst the startled mice.
+                      They look at you and you look at them both 
+                      in shock.
+
+                      What do you want to do:
+
+                      - Fight the mice
+                      - Explain to them you mean no harm
+                      """))
+        
+        if "fight" in choice:
+            print(dedent("""
+                  You tower over the tiny mice but they are unafraid.
+                  General Nibbles turns away in the ultimate sign of
+                  mouse disrespect. You are an unworthy opponent for a
+                  such a distinguished mouse. Killing you is not, however,
+                  below Private Basil who steps forward bearing her teeth
+                  and shadow boxing.
+                  """))
+            fightlibrary.fight_creature(4, 4, "Private Basil")
+            print(fightlibrary.speeches[0])
+            door_choice = input(dedent("""Do you wish to enter or continue walking
+                                enter/continue
+                                """))
+            if "enter" in door_choice:
+                return experimental_lab
+            else:
+                print("You continue down the corridor")
+                return locked_door
+        elif "explain" in choice:
+            print(dedent("""
+                  You start to explain about how you come in peace
+                  and that some of your best friends are mice but 
+                  the mice look sceptical. Run a charm test to see
+                  if you can persuade them.
+                  """))
+            print("hero charm is", fightlibrary.hero_charm)
+            charm_choice = input("Press any key to start the charm test ")
+            if (random.randint(1, 12) <= fightlibrary.hero_charm):
+                print(dedent("""
+                      General Nibbles nods slowly. 'Clearly your are a
+                      friend of the mouse and these are indeed times when mice
+                      need friends. Dark times. Our kin are held
+                      against their will on this station in awful labs where
+                      the Veden experiment on them and then, when their small
+                      bodies can't take anymore, kill them. 
+
+                      Friend of the Mouse, will you help rescue our kin?
+                      They are, all of them, skilled mice and can help you
+                      in your own escape.'
+
+                      You say you will do all you can to help the mouse cause.
+                      You and the mice exchange bows and exit by the door into
+                      a corridor. There's a door in the wall of the corridor.                                       
+                      """))
+                corridor_choice = input("Enter the door or keep on walking? enter/continue ")
+                if "enter" in corridor_choice:
+                    return experimental_lab
+                else:
+                    return locked_door
+            else:
+                print(dedent("""
+                These mice have been lied to before 
+                and aren't inclined
+                to trust strangers. General Nibbles 
+                starts ranting about assasins and before
+                you can calm him down, Private Basil
+                launches her tiny frame at your face 
+                screaming the thousand year
+                old warcry of her people. For better or worse you will
+                need to fight this mouse. General Nibbles refuses to engage
+                for you are too lowly for his dagger. As Private Basil attacks
+                she starts chanting in a low voice
+                """))
+                fightlibrary.fight_creature(4, 4, "Private Basil")
+                print(fightlibrary.speeches[0])
+                door_choice = input(dedent("""Do you wish to enter or continue walking
+                                enter/continue
+                                """))
+                if "enter" in door_choice:
+                    return experimental_lab
+                else:
+                    print("You continue down the corridor")
+                    return locked_door
+
+
+        else:
+            print("that doesn't make sense")
+            
+        
 mouse = Mouse_room()
 
-class Third_room(object):
+class experiment_lab(object):
 
     def enter(self):
-        print("welcome to the third room")
-        return fourth
+        print(dedent("""
+        You find yourself in some sort of experimental lab.
+        There's no Veden here but there's a small mouse in the corner
+        in a cage. The key lies on a table in the middle of the room
+        upon which there's also a strange looking gun and a armored
+        bracelet. There's only space in your jacket for one of these
+        """))
+        carry_choice = input(dedent("""
+                       Which/who would you like to take 
+                       with you? mouse/gun/bracelet? """))
+        if "mouse" in carry_choice:
+            fightlibrary.coat_pockets["side_pocket"] = "Old Jake" 
+            print(dedent("""
+            You turn the key and release the mouse from the cage. The mouse
+            is weak and weary but manages to find his voice
+            Many thanks for my release stranger my name is Old Jake.
+            Many torments have myself and my kin suffered at the hands
+            of the Veden in the name of science but that will
+            soon be over. The Prophets spoke of the coming
+            of the Meepishan who will deliver us from bondage. When
+            we dance on the bones of our enemies, you will be an honoured guest
+            at the feast. First, though, we must get you off this ship. Let us
+            make hast!'
 
-third = Third_room()
+            You tuck Old Jake in your sidepocket and continue on
+            down the corridor where you find yourself at a dead end
+            with a locked door in front of you
+            """))
+            return locked_door
+        elif "gun" in carry_choice:
+            fightlibrary.coat_pockets["side_pocket"] = "veden gun" 
+            print(dedent("""
+            What the Veden lack in culture they make up for in weaponry.
+            This gun likely packs a punch. You put it in your side pocket
+            You continue on down the corridor where you find yourself
+            at a dead end with a locked door in front of you
+            """))
+            return locked_door
+        elif "bracelet" in carry_choice:
+            fightlibrary.coat_pockets["side_pocket"] = "bracelet" 
+            print(dedent("""
+            Veden armour is universe reknown. You suspect this will come in use later
+            
+            You continue on down the corridor where you find yourself
+            at a dead end with a locked door in front of you
+            """))
+            return locked_door
+        else:
+            print(dedent("""
+            You babble incoherently to yourself and then leave
+            the room. 
 
-class Fourth_room(object):
+            You continue on down the corridor where you find yourself
+            at a dead end with a locked door in front of you
+            """))
+            return locked_door
+        
+experimental_lab = experiment_lab()
+
+class lock_door(object):
 
     def enter(self):
-        print("welcome to the Fourth room")
-        return final
+        print(dedent("""
+        The door is solid steel so you've no hope of
+        blasting your way through it. There's a keypad
+        and you'll have to guess the passcode. Above the
+        keypad you see an old tattered yellow sticky note.
+        There's four numbers on there but you can only
+        make out the first (a one) and the last (a four)
+        """))
+        for x in range(10):
+            keypad_choice = input("Guess the entrycode ")
+            print(keypad_choice)
+            if keypad_choice == "1234":
+                print("The door swings open ...")
+                return veden_guard
+            else:
+                print("Nope that's not it. Try again")
+        print(dedent("""
+        you've run out of tries! Poison gas relases from
+        the top of the door and you die choking.
+        """))
+        exit(0)
 
-fourth = Fourth_room()
+locked_door = lock_door()
+
+class veden(object):
+
+    def enter(self):
+        print(dedent("""
+        On the other side of the door is a Veden Guard!
+        You must fight!
+        """))
+        fightlibrary.fight_creature(6, 6, "Door Guard")
+        print(dedent("""
+        Bruised and bloodied you stumble past the Veden's lifeless
+        body. Every inch of you is tired but there is no time for
+        rest. You hear shouts from the corridor behind you and start running.
+        The corridor forks left and right. 
+        """))
+        stop_loop = None
+        while stop_loop != "stop":
+            choice_corridor_fork = input(dedent("""
+            right or left?
+            """))
+            if "right" in choice_corridor_fork:
+                stop_loop = "stop"
+                print("right")
+            elif "left" in choice_corridor_fork:
+                stop_loop = "stop"
+                return gun_turret_place
+            else:
+                print(dedent("""
+                that doesn't make sense. Please choose
+                left or right
+                """))
+
+veden_guard = veden()
+
+class gun_turret(object):
+
+    def enter(self):
+        print(dedent("""
+        An alarm goes off and a machine gun turret appears out of
+        the ceiling. You hide behind some storage containers and try
+        to disable it
+        """))
+        fightlibrary.fight_creature(10, 4, "Gun Turret")
+        print(dedent("""
+        The corridor curves around to the right and you follow it.
+        """))
+        
+gun_turret_place = gun_turret()
+
+
+
 
 class Final_room(object):
     pass
@@ -54,5 +365,4 @@ class Runner(object):
 
 Run = Runner()
 Run.loop_through_rooms()
-
 

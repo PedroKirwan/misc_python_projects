@@ -1,3 +1,5 @@
+#To access this function use fight_creature(skill, stamina)
+
 import random
 
 hero_skill = 0
@@ -56,30 +58,29 @@ class creature(object):
         print(self.wounds[random.randint(0, len(self.wounds)-1)])
 
 #fights a creature with specified skill and stamina
-def fight_creature(skill, stamina):
+def fight_creature(skill, stamina, who):
     global hero_stamina
-    global hero_luck
     creature_skill = skill 
     creature_stamina = stamina
     while creature_stamina > 0 and hero_stamina > 0:
-        print("hero stamina is", hero_stamina)
-        print("creature stamina is", creature_stamina)
+        print("Your stamina is now", hero_stamina)
+        print(f"The stamina of {who} is now", creature_stamina)
         beast = creature()
         beast.creature_action()
         if (hero_skill + random.randint(1, 12)
            > creature_skill + random.randint(1, 12)):
-            print("You have wounded the creature")
+            print(f"You have wounded {who}")
             creature_stamina -= 2
         elif (hero_skill + random.randint(1, 12)
               < creature_skill + random.randint(1, 12)):
             beast.creature_wound()
             hero_stamina -= 2
         else: 
-            print("Your swords clash")
+            print("You clash. Neither of you is wounded")
     if creature_stamina < 1: 
-        print("the creature is dead")
+        print(f"{who} is dead")
     elif hero_stamina < 1:
-        hero_death("So long amigo! You have perished")
+        hero_death("You have died")
         
 
 
@@ -103,4 +104,3 @@ The monster's stamina level is {hero_stamina}
 
 """)
 
-fight_creature(monster_skill, monster_stamina)
