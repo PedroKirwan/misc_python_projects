@@ -59,7 +59,12 @@ class creature(object):
               "The creature stabs at you",
               "The creature kung fu kicks at you",
               "The creature round house kicks at you"]     
-                                
+                               
+    machine_actions = ["The machine shoots bullets at you"]
+            
+    machine_wounds = ["A bullet hits you in the arm",
+                      "A bullet hits you in the leg",]
+
     wounds = ["The creature hits you square in the face",
               "The creature hits you in the stomach",
               "The creature hits you in the leg",]
@@ -72,6 +77,12 @@ class creature(object):
 
     def creature_wound(self):
         print(self.wounds[random.randint(0, len(self.wounds)-1)])
+
+    def machine_action(self):
+        print(self.machine_actions[random.randint(0, len(self.machine_actions)-1)])
+
+    def machine_wound(self):
+        print(self.machine_wounds[random.randint(0, len(self.machine_wounds)-1)])
 
 #fights a creature with specified skill and stamina
 def fight_creature(skill, stamina, who):
@@ -98,6 +109,31 @@ def fight_creature(skill, stamina, who):
     elif hero_stamina < 1:
         hero_death("You have died")
         
+#fights the machine gun turret
+def fight_turret(skill, stamina, who):
+    global hero_stamina
+    turret_skill = skill 
+    turret_stamina = stamina
+    while turret_stamina > 0 and hero_stamina > 0:
+        print("Your stamina is now", hero_stamina)
+        print(f"The stamina of {who} is now", turret_stamina)
+        machine = creature()
+        machine.machine_action()
+        if (hero_skill + random.randint(1, 12)
+           > turret_skill + random.randint(1, 12)):
+            print(f"You have wounded {who}")
+            turret_stamina -= 2
+        elif (hero_skill + random.randint(1, 12)
+              < turret_skill + random.randint(1, 12)):
+            machine.machine_wound()
+            hero_stamina -= 2
+        else: 
+            print("Both you and the turret miss")
+    if turret_stamina < 1: 
+        print(f"{who} is dead")
+    elif hero_stamina < 1:
+        hero_death("You have died")
+
 define_hero_skill()
 define_hero_stamina()
 define_hero_charm()

@@ -19,8 +19,6 @@ Close any pictures that pop up to continue with the story
 """))
 
 system("audacious bensoundscifi.mp3 . &")
-system("bg")
-# system("xdotool  windowminimize")
 
 class Dungeon_room(object):
 
@@ -354,7 +352,7 @@ class gun_turret(object):
         the ceiling. You hide behind some storage containers and try
         to disable it
         """))
-        fightlibrary.fight_creature(10, 4, "Gun Turret")
+        fightlibrary.fight_turret(10, 4, "Gun Turret")
         print(dedent("""
         The corridor curves around to the right and you follow it.
         """))
