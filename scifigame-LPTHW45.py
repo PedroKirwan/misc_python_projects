@@ -6,10 +6,10 @@ import random
 import fightlibrary
 from textwrap import dedent
 
-# planned improvements
+# to do 
+# change turret combat so that doesn't refer to a creature
 # launch the sci-fi music in the background
 # make bensound.com clickable
-# add in something that notices if someone tries an options more than once (e.g. checking walls)
 
 print(dedent("""
 Some atmospheric sci-fi music by bensound.com.
@@ -58,7 +58,9 @@ class Dungeon_room(object):
               """))
         
         choice = ""
-        
+
+        # add in something here so it recognises if someone has tried an option
+        # more than once
         stop_ceiling_loop = None
         while stop_ceiling_loop != "stop":
             choice = input("What would you like to do? ")
